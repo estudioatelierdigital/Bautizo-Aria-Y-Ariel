@@ -1,0 +1,689 @@
+<!--
+  NOTA RÁPIDA DE EDICIÓN (index.html):
+  - Textos, nombres, frase religiosa, padrinos, horarios, vestimenta y mensajes: edita el contenido dentro de cada sección o en `script.js`.
+  - Fechas y horas: revisa el bloque de "Rascar para revelar" (12 de diciembre de 2026 · 11:00 am) y la fecha límite de confirmación (4 de diciembre).
+  - Enlaces: actualiza los enlaces de Google Maps en la sección de ubicaciones, el enlace de redes de Atelier Digital en el footer y los datos bancarios dentro del modal (`#bank-modal`).
+  - Imágenes y audio: la galería queda lista con espacios reservados (`assets/img/galeria-01.jpg` a `assets/img/galeria-05.jpg`) para cuando te envíen las fotos, además del logo de Atelier Digital al final (`assets/img/logo.png`) y la pista ambiental (`assets/audio/music.mp3`).
+  - Colores: se controlan desde `styles.css` (beige, verde salvia, dorado y café claro).
+-->
+<!DOCTYPE html>
+<html lang="es" data-theme="botanical-baptism">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Aria Leonor &amp; Ariel Leobardo — Nuestro Bautizo</title>
+
+  <!-- Tipografías editoriales: Cormorant Garamond + Pinyon Script + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Capa de efectos ambientales sutiles -->
+  <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- SOBRE INTERACTIVO DE APERTURA -->
+  <div id="envelope-overlay" class="envelope-overlay" role="dialog" aria-modal="true" aria-label="Sobre de invitación">
+    <div class="envelope-wrapper">
+      <p class="envelope-eyebrow">TIENES UNA INVITACIÓN ESPECIAL</p>
+      <p class="envelope-couple">Aria &amp; Ariel</p>
+
+      <button
+        type="button"
+        id="open-envelope-btn"
+        class="envelope-stage"
+        aria-label="Abrir invitación"
+      >
+        <span class="envelope-back" aria-hidden="true"></span>
+        <span class="envelope-pocket" aria-hidden="true"></span>
+        <span class="envelope-flap" aria-hidden="true"></span>
+        <span class="wax-seal" aria-hidden="true">
+          <span class="wax-seal-initials">A &amp; A</span>
+        </span>
+      </button>
+
+      <p class="envelope-hint">Toca el sello o el sobre para abrir</p>
+    </div>
+  </div>
+
+  <!-- BARRA SUPERIOR DE CONTROLES (PANTALLA COMPLETA, COMPARTIR) -->
+  <header id="top-controls" class="top-controls" aria-label="Controles de la invitación">
+    <div class="top-controls-inner">
+      <span class="brand-kicker-pill">BAUTIZO · 12 DIC 2026</span>
+
+      <div class="utility-actions">
+        <button
+          type="button"
+          id="fullscreen-btn"
+          class="util-btn"
+          aria-pressed="false"
+          aria-label="Alternar pantalla completa"
+          data-tooltip="Ver en pantalla completa"
+        >
+          <span>Pantalla Comp</span>
+        </button>
+
+        <button
+          type="button"
+          id="share-btn"
+          class="util-btn"
+          aria-label="Compartir invitación"
+          data-tooltip="Compartir invitación"
+        >
+          <span>Compartir</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Aviso discreto al copiar enlace -->
+    <div id="share-feedback" class="share-feedback" role="status" aria-live="polite"></div>
+  </header>
+
+  <!-- Audio ambiental desde assets/audio/music.mp3 -->
+  <audio id="bg-music" src="assets/audio/music.mp3" loop preload="metadata"></audio>
+
+  <!-- CONTENIDO PRINCIPAL DE LA INVITACIÓN -->
+  <main id="invitation-main" class="invitation-main is-locked">
+    <!-- 1. PORTADA / HERO TIPOGRÁFICO BOTÁNICO -->
+    <section id="hero" class="hero-section">
+      <div class="hero-sticky-frame">
+        <div class="hero-backdrop" data-parallax="0.14" aria-hidden="true">
+          <div class="botanical-ring botanical-ring--outer"></div>
+          <div class="botanical-ring botanical-ring--inner"></div>
+        </div>
+
+        <div class="hero-foreground container">
+          <p class="section-index hero-index" data-typewriter>01</p>
+          <p class="hero-kicker" data-typewriter>NUESTRO BAUTIZO</p>
+          <h1 class="hero-title">
+            <span data-typewriter>Aria Leonor</span>
+            <span class="hero-amp" aria-hidden="true">&amp;</span>
+            <span data-typewriter>Ariel Leobardo</span>
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEPARADOR FLORAL HORIZONTAL ENTRE PORTADA Y BIENVENIDA -->
+    <div class="section-floral-divider" aria-hidden="true">
+      <div class="floral-strip">
+        <img src="assets/img/Flores_Flores 1.png" alt="" class="floral-tile floral-tile--left" />
+        <img src="assets/img/1666_FLOR DECORATIVA 2.png" alt="" class="floral-tile floral-tile--rose" />
+        <img src="assets/img/Flores_Flores 6.png" alt="" class="floral-tile floral-tile--right" />
+        <img src="assets/img/1666_FLOR DECORATIVA 2.png" alt="" class="floral-tile floral-tile--rose" />
+        <img src="assets/img/Flores_Flores 1.png" alt="" class="floral-tile floral-tile--left" />
+        <img src="assets/img/1666_FLOR DECORATIVA 2.png" alt="" class="floral-tile floral-tile--rose" />
+        <img src="assets/img/Flores_Flores 6.png" alt="" class="floral-tile floral-tile--right" />
+        <img src="assets/img/1666_FLOR DECORATIVA 2.png" alt="" class="floral-tile floral-tile--rose" />
+        <img src="assets/img/Flores_Flores 1.png" alt="" class="floral-tile floral-tile--left" />
+        <img src="assets/img/1666_FLOR DECORATIVA 2.png" alt="" class="floral-tile floral-tile--rose" />
+        <img src="assets/img/Flores_Flores 6.png" alt="" class="floral-tile floral-tile--right" />
+        <img src="assets/img/1666_FLOR DECORATIVA 2.png" alt="" class="floral-tile floral-tile--rose" />
+        <img src="assets/img/Flores_Flores 1.png" alt="" class="floral-tile floral-tile--left" />
+      </div>
+    </div>
+
+    <!-- 2. MENSAJE ESPECIAL DE BIENVENIDA Y FRASE RELIGIOSA -->
+    <section id="welcome" class="section welcome-section" data-reveal>
+      <div class="container container--narrow">
+        <p class="section-index">02</p>
+        <h2 class="section-heading">Una bendición desde el corazón</h2>
+        <blockquote class="sacred-quote">
+          “Dos vidas que Dios nos regaló, dos almas que hoy confiamos a su amor. Que su bendición sea su refugio, su luz su guía y su gracia el regalo que los acompañe toda la vida.”
+        </blockquote>
+        <p class="body-copy">
+          Con inmensa alegría y gratitud, invitamos a nuestra familia y seres queridos a acompañarnos en el bautizo de nuestros gemelos, un día muy especial en el que presentaremos sus vidas ante Dios.
+        </p>
+        <p class="body-copy">
+          Tu presencia y cariño harán de esta celebración un recuerdo inolvidable para ellos.
+        </p>
+        <div class="parents-block">
+          <span class="parents-label">SUS PAPÁS</span>
+          <p class="parents-names">Susana Adela Morales Galaviz &amp; Juan Francisco Yocupicio Gil</p>
+        </div>
+        <p class="signature-line font-script">Aria Leonor &amp; Ariel Leobardo</p>
+      </div>
+    </section>
+
+    <!-- 3. PADRINOS Y PRESENTACIÓN EDITORIAL -->
+    <section id="godparents" class="section story-section" data-reveal>
+      <div class="container editorial-split">
+        <div class="editorial-split-media">
+          <div class="botanical-plaque">
+            <span class="plaque-tag">ACOMPAÑANDO SU CAMINO</span>
+            <h3 class="plaque-title font-script">Con amor y fe</h3>
+            <p class="plaque-copy">
+              Dos pequeños corazones que llenan nuestro hogar de luz, ternura y naturaleza compartida.
+            </p>
+            <div class="plaque-divider" aria-hidden="true">✦</div>
+          </div>
+        </div>
+
+        <div class="editorial-split-content">
+          <p class="section-index">03</p>
+          <h2 class="section-heading">Nuestros padrinos</h2>
+          <p class="body-copy">
+            Agradecemos de corazón a quienes aceptaron guiar, proteger y acompañar con su ejemplo la vida espiritual de Aria Leonor y Ariel Leobardo:
+          </p>
+
+          <ul class="godparents-list">
+            <li>Reyna Guadalupe Yocupicio Gil</li>
+            <li>David Antonio Yocupicio Gil</li>
+            <li>Frania Rocio Morales Nieblas</li>
+            <li>Gilberto Morales Briseño</li>
+            <li>Lucio Marcial Valenzuela Yocupicio</li>
+            <li>Gabriela Contreras Mendivil</li>
+            <li>Carolina Morales Nieblas</li>
+            <li>Javier Arturo Ibarra Larrinaga</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. RASCAR PARA REVELAR + CUENTA REGRESIVA -->
+    <section id="date-reveal" class="section date-section" data-reveal>
+      <div class="container">
+        <p class="section-index">04</p>
+        <h2 class="section-heading section-heading--center">Reserva la fecha</h2>
+        <p class="section-subtitle section-subtitle--center">
+          Rasca suavemente la superficie para descubrir el día de nuestro bautizo
+        </p>
+
+        <div class="date-experience-single">
+          <div class="scratch-card">
+            <div class="scratch-stage">
+              <div id="scratch-revealed-content" class="scratch-revealed">
+                <span class="scratch-month">DICIEMBRE 2026</span>
+                <strong class="scratch-day-number">12</strong>
+                <span class="scratch-weekday">SÁBADO · CEREMONIA 11:00 AM</span>
+              </div>
+              <canvas id="scratch-canvas" class="scratch-canvas" aria-label="Área interactiva para rascar y revelar la fecha"></canvas>
+            </div>
+
+            <div class="scratch-actions">
+              <span id="scratch-progress-label" class="scratch-progress">
+                Desliza el dedo o el cursor para rascar
+              </span>
+              <button type="button" id="scratch-reveal-btn" class="text-link-btn">
+                Revelar fecha
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cuenta regresiva dinámica -->
+        <div class="countdown-box" aria-live="polite">
+          <p class="countdown-label">Faltan</p>
+          <div id="countdown-grid" class="countdown-grid">
+            <div class="countdown-item" data-unit="days">
+              <div class="countdown-ring">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <circle class="ring-track" cx="50" cy="50" r="44"></circle>
+                  <circle id="ring-days" class="ring-progress" cx="50" cy="50" r="44"></circle>
+                </svg>
+                <span id="cd-days" class="countdown-value">00</span>
+              </div>
+              <span class="countdown-unit">Días</span>
+            </div>
+
+            <div class="countdown-item" data-unit="hours">
+              <div class="countdown-ring">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <circle class="ring-track" cx="50" cy="50" r="44"></circle>
+                  <circle id="ring-hours" class="ring-progress" cx="50" cy="50" r="44"></circle>
+                </svg>
+                <span id="cd-hours" class="countdown-value">00</span>
+              </div>
+              <span class="countdown-unit">Horas</span>
+            </div>
+
+            <div class="countdown-item" data-unit="minutes">
+              <div class="countdown-ring">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <circle class="ring-track" cx="50" cy="50" r="44"></circle>
+                  <circle id="ring-minutes" class="ring-progress" cx="50" cy="50" r="44"></circle>
+                </svg>
+                <span id="cd-minutes" class="countdown-value">00</span>
+              </div>
+              <span class="countdown-unit">Minutos</span>
+            </div>
+
+            <div class="countdown-item countdown-item--seconds" data-unit="seconds">
+              <div class="countdown-ring">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <circle class="ring-track" cx="50" cy="50" r="44"></circle>
+                  <circle id="ring-seconds" class="ring-progress" cx="50" cy="50" r="44"></circle>
+                </svg>
+                <span id="cd-seconds" class="countdown-value">00</span>
+              </div>
+              <span class="countdown-unit">Segundos</span>
+            </div>
+          </div>
+          <p id="countdown-status" class="countdown-status"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ITINERARIO DEL EVENTO -->
+    <section id="itinerary" class="section itinerary-section" data-reveal>
+      <div class="container container--narrow">
+        <p class="section-index">05</p>
+        <h2 class="section-heading section-heading--center">Itinerario del día</h2>
+
+        <ol class="timeline" id="itinerary-timeline">
+          <li class="timeline-item" data-reveal>
+            <div class="timeline-marker" aria-hidden="true">01</div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <span class="timeline-time">11:00 AM</span>
+                <span class="timeline-glyph" aria-hidden="true">✦</span>
+              </div>
+              <h3 class="timeline-event">Ceremonia Religiosa</h3>
+              <p class="timeline-desc">
+                Celebración del bautizo de Aria Leonor y Ariel Leobardo en la Iglesia Católica Cristo Rey.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item" data-reveal>
+            <div class="timeline-marker" aria-hidden="true">02</div>
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <span class="timeline-time">5:00 PM</span>
+                <span class="timeline-glyph" aria-hidden="true">❖</span>
+              </div>
+              <h3 class="timeline-event">Recepción</h3>
+              <p class="timeline-desc">
+                Encuentro para celebrar y compartir juntos en Mezquite Jardín de Eventos.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. CÓDIGO DE VESTIMENTA (MAZO DESLIZABLE CABALLEROS / DAMAS) -->
+    <section id="dresscode" class="section dresscode-section" data-reveal>
+      <div class="container container--narrow">
+        <p class="section-index">06</p>
+        <h2 class="section-heading section-heading--center">Código de vestimenta</h2>
+        <p class="dresscode-badge font-script">Formal relajado</p>
+
+        <div class="dresscode-stack-wrapper">
+          <p class="dresscode-stack-hint">
+            Desliza la tarjeta hacia arriba o toca para alternar entre Caballeros y Damas
+          </p>
+
+          <div
+            id="dresscode-stack"
+            class="dresscode-stack"
+            role="region"
+            aria-label="Tarjetas de código de vestimenta"
+          >
+            <!-- Tarjeta 1: Caballeros -->
+            <article class="dresscode-card is-front" data-card-index="0" tabindex="0">
+              <div class="dresscode-card-header">
+                <span class="dresscode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M12 3l3.5 4.5L12 11 8.5 7.5 12 3z" />
+                    <path d="M12 11v10" />
+                    <path d="M6 8l-2 4 4 2v7h8v-7l4-2-2-4" />
+                  </svg>
+                </span>
+                <span class="dresscode-card-tag">01 / 02</span>
+              </div>
+              <h3 class="dresscode-card-title">Caballeros</h3>
+              <p class="body-copy">
+                Guayabera, camisa de vestir o traje ligero en tonos neutros, sin necesidad de corbata pesada.
+              </p>
+              <span class="dresscode-card-action">Desliza ↑ o toca para ver Damas</span>
+            </article>
+
+            <!-- Tarjeta 2: Damas -->
+            <article class="dresscode-card is-back" data-card-index="1" tabindex="0">
+              <div class="dresscode-card-header">
+                <span class="dresscode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M12 3c2 2.2 2 4.5 0 6.5-2-2-2-4.3 0-6.5z" />
+                    <path d="M8.5 12h7l2.5 9H6l2.5-9z" />
+                  </svg>
+                </span>
+                <span class="dresscode-card-tag">02 / 02</span>
+              </div>
+              <h3 class="dresscode-card-title">Damas</h3>
+              <p class="body-copy">
+                Vestido midi, falda o conjunto fresco y elegante; se sugiere calzado cómodo para jardín.
+              </p>
+              <span class="dresscode-card-action">Desliza ↑ o toca para ver Caballeros</span>
+            </article>
+          </div>
+
+          <div class="dresscode-stack-controls">
+            <button type="button" id="dresscode-flip-btn" class="btn btn-outline">
+              Cambiar tarjeta ↑
+            </button>
+          </div>
+        </div>
+
+        <div class="palette-box">
+          <span class="palette-label">Paleta sugerida</span>
+          <div class="palette-swatches" aria-hidden="true">
+            <span class="swatch" style="--swatch-color: #E8DEC8;" title="Beige"></span>
+            <span class="swatch" style="--swatch-color: #7E9484;" title="Verde salvia"></span>
+            <span class="swatch" style="--swatch-color: #C4A265;" title="Dorado"></span>
+            <span class="swatch" style="--swatch-color: #B49472;" title="Café claro"></span>
+          </div>
+          <p class="dresscode-avoid">
+            Colores neutros inspirados en la naturaleza y el estilo formal relajado.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. UBICACIONES (MAPA INTERACTIVO GOOGLE MAPS + BOTÓN DIRECTO) -->
+    <section id="location" class="section location-section" data-reveal>
+      <div class="container">
+        <p class="section-index">07</p>
+        <h2 class="section-heading section-heading--center">Ubicaciones</h2>
+
+        <div class="venues-grid">
+          <article class="venue-card">
+            <span class="venue-tag">CEREMONIA · 11:00 AM</span>
+            <h3 class="venue-name">Iglesia Católica Cristo Rey</h3>
+            <p class="venue-address">Calle Benito Juárez García s/n (esquina con 16 de Septiembre), Col. Centro, Huatabampo, Sonora</p>
+            <a
+              href="https://www.google.com/maps/place/Iglesia+Católica+Cristo+Rey/@26.8266812,-109.6429519,17z/data=!3m1!4b1!4m6!3m5!1s0x86b78b95cd7d192b:0x141d985f35ff56d5!8m2!3d26.8266812!4d-109.6429519!16s%2Fg%2F12hn4hggx?entry=ttu&g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              Abrir en Google Maps
+            </a>
+          </article>
+
+          <article class="venue-card">
+            <span class="venue-tag">RECEPCIÓN · 5:00 PM</span>
+            <h3 class="venue-name">Mezquite Jardín de Eventos</h3>
+            <p class="venue-address">10 de Abril 52, Escuelas, 85990 Huatabampo, Son.</p>
+            <a
+              href="https://www.google.com/maps/place/Mezquite+Jardín+de+Eventos/@26.8191827,-109.6322939,17z/data=!4m7!3m6!1s0x86b78b185488b8ab:0x914bc28774b3282!8m2!3d26.8191827!4d-109.6277878!15sCjlqYXJkw61uIGNlcmNhIGRlIE1lenF1aXRlLCBMb3MgTmFyYW5qb3MsIEh1YXRhYmFtcG8sIFNvbi6SARZmdW5jdGlvbl9yb29tX2ZhY2lsaXR54AEA!16s%2Fg%2F11r6kcn21f?entry=tts&g_ep=EgoyMDI2MTExNi4wIOC7DCoASAFQAw%3D%3D&skid=1118da87-215e-4c5b-b701-d3318e9abda8"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              Abrir en Google Maps
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. REGALOS / APORTACIÓN -->
+    <section id="gifts" class="section gifts-section" data-reveal>
+      <div class="container container--narrow">
+        <p class="section-index">09</p>
+        <h2 class="section-heading section-heading--center">Regalos y detalles</h2>
+        <p class="body-copy body-copy--center">
+          Los mejores regalos son los momentos y recuerdos que construimos juntos. Si desean hacer un presente a Aria y Ariel, agradeceremos mucho su aportación en efectivo o transferencia.
+        </p>
+
+        <div class="gifts-options">
+          <div class="gift-card">
+            <h3 class="gift-card-title">Aportación en Efectivo</h3>
+            <p class="gift-card-detail">
+              Podrás entregar tu detalle personalmente el día de la celebración.
+            </p>
+          </div>
+
+          <div class="gift-card">
+            <h3 class="gift-card-title">Transferencia Bancaria</h3>
+            <p class="gift-card-detail">
+              Consulta los datos bancarios para realizar tu aportación por transferencia.
+            </p>
+            <button type="button" id="open-bank-modal-btn" class="btn btn-outline">
+              Ver datos bancarios
+            </button>
+          </div>
+        </div>
+
+        <!-- Popup modal de transferencia bancaria (listo para editar después) -->
+        <div id="bank-modal" class="bank-modal" role="dialog" aria-modal="true" aria-labelledby="bank-modal-title" hidden>
+          <div class="bank-modal-card">
+            <button type="button" id="close-bank-modal-btn" class="bank-modal-close" aria-label="Cerrar ventana">
+              ×
+            </button>
+            <p class="section-index">09 · B</p>
+            <h3 id="bank-modal-title" class="bank-modal-title">Transferencia Bancaria</h3>
+            <p class="bank-modal-subtitle">Datos listos para configurar posteriormente</p>
+
+            <dl class="bank-details-list">
+              <div class="bank-detail-row">
+                <dt>Banco</dt>
+                <dd id="bank-name-value">BBVA</dd>
+              </div>
+              <div class="bank-detail-row">
+                <dt>Titular</dt>
+                <dd id="bank-holder-value">Susana Morales</dd>
+              </div>
+              <div class="bank-detail-row">
+                <dt>Cuenta / CLABE</dt>
+                <dd id="bank-clabe-value">4152313954349564</dd>
+              </div>
+            </dl>
+
+            <div class="bank-modal-actions">
+              <button type="button" id="copy-clabe-btn" class="btn btn-primary">
+                Copiar CLABE
+              </button>
+              <p id="bank-copy-feedback" class="bank-copy-feedback" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CONFIRMACIÓN DE ASISTENCIA (RSVP -> WHATSAPP) + AGREGAR A CALENDARIO -->
+    <section id="rsvp" class="section rsvp-section" data-reveal>
+      <div class="container container--narrow">
+        <p class="section-index">10</p>
+        <h2 class="section-heading section-heading--center">Confirmación de asistencia</h2>
+        <p class="section-subtitle section-subtitle--center">
+          Por favor confírmanos tu asistencia antes del 4 de diciembre de 2026
+        </p>
+
+        <form id="rsvp-form" class="rsvp-form" novalidate>
+          <div class="form-group">
+            <label for="guest-name" class="form-label">Nombre completo del invitado *</label>
+            <input
+              type="text"
+              id="guest-name"
+              name="guestName"
+              class="form-input"
+              required
+              placeholder="Ej. Familia Yocupicio Morales"
+            />
+            <span class="form-error" id="guest-name-error"></span>
+          </div>
+
+          <fieldset class="form-group form-fieldset">
+            <legend class="form-label">¿Asistirás al bautizo? *</legend>
+            <div class="radio-row">
+              <label class="radio-option">
+                <input type="radio" name="attendance" value="yes" checked />
+                <span>Sí, ahí estaremos</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="attendance" value="no" />
+                <span>No podremos asistir</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div id="companions-fields" class="companions-fields">
+            <div class="form-group">
+              <label for="companions-count" class="form-label">Número de asistentes *</label>
+              <select id="companions-count" name="companionsCount" class="form-input">
+                <option value="1">1 asistente</option>
+                <option value="2">2 asistentes</option>
+                <option value="3">3 asistentes</option>
+                <option value="4">4 asistentes</option>
+                <option value="5">5 asistentes</option>
+                <option value="6">6 asistentes</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="companions-names" class="form-label">
+                Nombres de los asistentes (opcional)
+              </label>
+              <input
+                type="text"
+                id="companions-names"
+                name="companionsNames"
+                class="form-input"
+                placeholder="Ej. Nombre de quienes asisten"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guest-message" class="form-label">
+              Mensaje especial para Aria Leonor y Ariel Leobardo (opcional)
+            </label>
+            <textarea
+              id="guest-message"
+              name="guestMessage"
+              rows="3"
+              class="form-input form-textarea"
+              placeholder="Escribe tus buenos deseos o bendiciones..."
+            ></textarea>
+          </div>
+
+          <button type="submit" id="rsvp-submit-btn" class="btn btn-primary btn-full">
+            Confirmar por WhatsApp
+          </button>
+
+          <p id="rsvp-feedback" class="rsvp-feedback" role="status" aria-live="polite"></p>
+        </form>
+
+        <!-- Agregar al calendario (Google Calendar + ICS) -->
+        <div class="calendar-export-box">
+          <h3 class="calendar-export-title">Guardar el evento en tu calendario</h3>
+          <div class="calendar-export-actions">
+            <a
+              id="google-calendar-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              Google Calendar
+            </a>
+            <button type="button" id="download-ics-btn" class="btn btn-outline">
+              Descargar archivo (.ics)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. PIE DE PÁGINA / CRÉDITOS ATELIER DIGITAL -->
+    <footer id="atelier-footer" class="atelier-footer" data-reveal>
+      <div class="container atelier-footer-inner">
+        <span class="atelier-rule" aria-hidden="true"></span>
+
+        <div class="atelier-emblem-wrap">
+          <button
+            type="button"
+            id="atelier-promo-btn"
+            class="atelier-emblem-btn"
+            aria-expanded="false"
+            aria-controls="atelier-promo-box"
+            aria-label="Descubrir sorpresa de Atelier Digital"
+          >
+            <img
+              src="assets/img/logo.png"
+              alt="Logo de Atelier Digital"
+              class="atelier-emblem"
+            />
+          </button>
+        </div>
+
+        <div id="atelier-promo-box" class="atelier-promo-box" role="status" aria-live="polite" hidden>
+          <span class="atelier-promo-badge">¡SORPRESA DESBLOQUEADA!</span>
+          <p class="atelier-promo-text">
+            Obtuviste un 15% de descuento en la invitación base al contactar a Atelier Digital.
+          </p>
+        </div>
+
+        <p class="atelier-eyebrow">INVITACIÓN CREADA POR</p>
+        <p class="atelier-brand">ATELIER DIGITAL</p>
+
+        <p class="atelier-pitch">
+          ¿Te gustó esta invitación? Podemos personalizar una con tus fotos, colores, música y detalles únicos.
+        </p>
+
+        <div class="atelier-socials" aria-label="Redes sociales de Atelier Digital">
+          <a
+            href="https://www.instagram.com/atelier.digitalmx?utm_source=ig_web_button_share_sheet&avpt=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="atelier-social-btn"
+            aria-label="Instagram de Atelier Digital"
+            title="Instagram"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+
+          <a
+            href="https://www.facebook.com/profile.php?id=61595745845232"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="atelier-social-btn"
+            aria-label="Facebook de Atelier Digital"
+            title="Facebook"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.5v3.2h2.8V21h3.2z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- LIGHTBOX DE GALERÍA -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de fotografía" hidden>
+    <button type="button" id="lightbox-close" class="lightbox-close" aria-label="Cerrar galería">×</button>
+    <button type="button" id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Fotografía anterior">‹</button>
+    <div class="lightbox-stage">
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+    <button type="button" id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Siguiente fotografía">›</button>
+  </div>
+
+  <!-- BOTÓN FLOTANTE DE MÚSICA -->
+  <button
+    type="button"
+    id="floating-music-btn"
+    class="floating-music-btn"
+    aria-pressed="false"
+    aria-label="Reproducir o pausar música"
+  >
+    <span class="floating-music-icon" aria-hidden="true">♪</span>
+    <span id="music-status-text" class="floating-music-label">Música</span>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
